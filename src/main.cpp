@@ -10,8 +10,10 @@ void setup()
 {
   virtualSerial.begin(115200); //Initialize virtual serial port
   Serial.begin(115200); //Initialize Arduino default serial port
-
+  digitalWrite(12, HIGH);
+  delay(16000);
   connectDevice();
+  digitalWrite(12, LOW);
 }
 
 void loop()
@@ -42,4 +44,16 @@ void publishData(){
   delay(100);
   virtualSerial.println("AT+CMQTTPUB=0,1,60");
   delay(100);
+
+  virtualSerial.println("AT+CMQTTTOPIC=0,3"); 
+  delay(100);
+  virtualSerial.println("frt");
+  delay(100);
+  virtualSerial.println("AT+CMQTTPAYLOAD=0,3");
+  delay(100);
+  virtualSerial.println("24");
+  delay(100);
+  virtualSerial.println("AT+CMQTTPUB=0,1,60");
+  delay(100);
+
 }
